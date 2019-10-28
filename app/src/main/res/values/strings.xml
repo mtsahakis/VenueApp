@@ -1,3 +1,6 @@
 <resources>
-    <string name="app_name">VenueApp</string>
+    <string name="app_name" translatable="false">VenueApp</string>
+    <string name="search_title">Search</string>
+    <string name="search_hint">Search for venues</string>
+    <string name="instructions">Press on the search icon and type then name of the place you are interested in. Hit the search icon on the keyboard and a list of nearby venues will appear shortly.</string>
 </resources>
