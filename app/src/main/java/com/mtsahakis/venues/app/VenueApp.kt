@@ -1,7 +1,8 @@
-package com.mtsahakis.venues
+package com.mtsahakis.venues.app
 
 import android.app.Application
 import android.util.Log
+import com.mtsahakis.venues.BuildConfig
 import timber.log.Timber
 import timber.log.Timber.DebugTree
 

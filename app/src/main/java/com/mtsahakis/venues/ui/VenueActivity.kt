@@ -1,21 +1,27 @@
-package com.mtsahakis.venues
+package com.mtsahakis.venues.ui
 
 import android.os.Bundle
 import android.view.Menu
+import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
-import timber.log.Timber
+import com.mtsahakis.venues.R
+import kotlinx.android.synthetic.main.activity_venue.*
 
 
-class VenueActivity : AppCompatActivity() {
+class VenueActivity : AppCompatActivity(), VenueContract.View {
+
+    private lateinit var presenter: VenueContract.Presenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_venue)
 
+        presenter = VenuePresenter(this)
+
         if (savedInstanceState == null) {
-            setUpView()
+            presenter.setUpView()
         }
     }
 
@@ -32,12 +38,12 @@ class VenueActivity : AppCompatActivity() {
 
             setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String): Boolean {
-                    onSearchStart(query)
+                    presenter.onNewQuery(query)
                     return false
                 }
 
                 override fun onQueryTextChange(query: String): Boolean {
-                    //get all text changes
+                    //no-op
                     return false
                 }
             })
@@ -45,16 +51,23 @@ class VenueActivity : AppCompatActivity() {
         return true
     }
 
-    private fun onSearchStart(query: String) {
-        Timber.e("query: $query")
-        hideHint()
+    override fun hideInstructions() {
+        instructions.visibility = View.GONE
     }
 
-    private fun setUpView() {
+    override fun hideProgress() {
+        progress.visibility = View.GONE
+    }
+
+    override fun showProgress() {
+        progress.visibility = View.VISIBLE
+    }
+
+    override fun populateList() {
 
     }
 
-    private fun hideHint() {
+    override fun showError() {
 
     }
 }
