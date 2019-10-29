@@ -7,10 +7,17 @@ import android.view.inputmethod.EditorInfo
 import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import com.mtsahakis.venues.R
+import com.mtsahakis.venues.data.VenueService
+import com.mtsahakis.venues.injection.DaggerVenueComponent
+import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_venue.*
+import javax.inject.Inject
 
 
 class VenueActivity : AppCompatActivity(), VenueContract.View {
+
+    @Inject
+    lateinit var venueService: VenueService
 
     private lateinit var presenter: VenueContract.Presenter
 
@@ -18,7 +25,10 @@ class VenueActivity : AppCompatActivity(), VenueContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_venue)
 
-        presenter = VenuePresenter(this)
+        val component = DaggerVenueComponent.create()
+        component.inject(this)
+
+        presenter = VenuePresenter(this, venueService, CompositeDisposable())
 
         if (savedInstanceState == null) {
             presenter.setUpView()
@@ -49,6 +59,11 @@ class VenueActivity : AppCompatActivity(), VenueContract.View {
             })
         }
         return true
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.unsubscribe()
     }
 
     override fun hideInstructions() {

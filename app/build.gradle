@@ -14,8 +14,17 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
+        debug {
+            buildConfigField 'String', 'CLIENT_ID', '"LH0D1IOIC1SLVTFMNAIVSHHGNF4HKR2K2QSC1NO3MR24H4HV"'
+            buildConfigField 'String', 'CLIENT_SECRET', '"1PTYZTOJVPD1ZXMS01CUPYRJCQBTRS50CZUARKRS41TRBEN5"'
+            minifyEnabled false
+            debuggable true
+        }
         release {
+            buildConfigField 'String', 'CLIENT_ID', '"CHANGE ME"'
+            buildConfigField 'String', 'CLIENT_SECRET', '"CHANGE ME"'
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -41,6 +50,8 @@ dependencies {
     // dagger
     implementation "com.google.dagger:dagger:${rootProject.ext.dagger}"
     kapt "com.google.dagger:dagger-compiler:${rootProject.ext.dagger}"
+    // okhttp interceptor
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.2.1'
     // test
     testImplementation "junit:junit:${rootProject.ext.junit}"
     testImplementation "org.mockito:mockito-core:${rootProject.ext.mockito}"

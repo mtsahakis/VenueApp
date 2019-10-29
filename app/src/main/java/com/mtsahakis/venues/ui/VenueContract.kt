@@ -18,6 +18,8 @@ interface VenueContract {
         fun setUpView()
 
         fun onNewQuery(query: String)
+
+        fun unsubscribe()
     }
 
 }
