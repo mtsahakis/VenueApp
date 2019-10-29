@@ -1,16 +1,16 @@
 Foursquare Venue Demo
 ------------------------------------------------
-This app fetches nearby venues after for a specific location using Foursquare API
+Demo app that retrieves nearby venues for a specific location using Foursquare API
 
 API Usage
 ------------------------------------------------
-The app comes bundles with API KEYS (CLIENT ID and CLIENT SECRET) but for the debug build type only.
+The app comes bundled with API KEYS (CLIENT ID and CLIENT SECRET) but for the debug build type only.
 The API keys are created against default Android signing key found under $HOME/.android/debug.keystore
 file. For production keys a developer needs to register their application here: https://foursquare.com/developers/apps
 
 The specific API used for this application is the venues search API.
 
-More information on that API can be found here: https://developer.foursquare.com/docs/api/venues/search
+Documentation on the aforementioned API can be found here: https://developer.foursquare.com/docs/api/venues/search
 
 Application Architecture
 ------------------------------------------------
