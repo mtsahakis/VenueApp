@@ -1,5 +1,6 @@
 <resources>
     <dimen name="activity_small_margin">8dp</dimen>
+    <dimen name="activity_very_small_margin">4dp</dimen>
     <dimen name="text_size_normal">18sp</dimen>
     <dimen name="card_view_corner_radius">4dp</dimen>
     <dimen name="card_view_elevation">4dp</dimen>

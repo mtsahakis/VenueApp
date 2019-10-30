@@ -2,9 +2,17 @@ package com.mtsahakis.venues.data
 
 import com.google.gson.annotations.SerializedName
 
-data class ApiResponse(@SerializedName("response") var response: Response)
+data class ApiResponse(
+    @SerializedName("response") var response: Response,
+    @SerializedName("meta") var meta: Meta
+)
 
 data class Response(@SerializedName("venues") var venues: List<Venue>)
+
+data class Meta(
+    @SerializedName("code") var code: String,
+    @SerializedName("errorDetail") var errorDetail: String?
+)
 
 data class Venue(
     @SerializedName("id") var id: String,

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.mtsahakis.venues.R
 import com.mtsahakis.venues.data.VenueService
 import com.mtsahakis.venues.injection.DaggerVenueComponent
@@ -29,6 +30,8 @@ class VenueActivity : AppCompatActivity(), VenueContract.View {
         component.inject(this)
 
         presenter = VenuePresenter(this, venueService, CompositeDisposable())
+        venues.layoutManager = LinearLayoutManager(this)
+        venues.adapter = VenueAdapter(presenter)
 
         if (savedInstanceState == null) {
             presenter.setUpView()
@@ -53,7 +56,6 @@ class VenueActivity : AppCompatActivity(), VenueContract.View {
                 }
 
                 override fun onQueryTextChange(query: String): Boolean {
-                    //no-op
                     return false
                 }
             })
@@ -78,8 +80,8 @@ class VenueActivity : AppCompatActivity(), VenueContract.View {
         progress.visibility = View.VISIBLE
     }
 
-    override fun populateList() {
-
+    override fun notifyRecycler() {
+        venues.adapter?.notifyDataSetChanged()
     }
 
     override fun showError() {

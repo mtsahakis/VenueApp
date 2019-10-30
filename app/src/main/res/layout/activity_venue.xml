@@ -16,7 +16,7 @@
         app:cardUseCompatPadding="true">
 
         <TextView
-            style="@style/Instruction.Text"
+            style="@style/App.Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/activity_small_margin"

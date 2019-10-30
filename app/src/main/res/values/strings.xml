@@ -2,5 +2,5 @@
     <string name="app_name" translatable="false">VenueApp</string>
     <string name="search_title">Search</string>
     <string name="search_hint">Type a place…</string>
-    <string name="instructions">Press the search icon and type the place of interest. Hit the search icon on the keyboard and a list of nearby venues will appear shortly.</string>
+    <string name="instructions">No venues listed. Press the search icon and type the place of interest. Hit the search icon on the keyboard and a list of nearby venues will appear shortly.</string>
 </resources>

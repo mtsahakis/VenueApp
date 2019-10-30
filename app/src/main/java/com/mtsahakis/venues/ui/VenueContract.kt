@@ -1,5 +1,7 @@
 package com.mtsahakis.venues.ui
 
+import com.mtsahakis.venues.data.Venue
+
 interface VenueContract {
 
     interface View {
@@ -9,7 +11,7 @@ interface VenueContract {
 
         fun showProgress()
 
-        fun populateList()
+        fun notifyRecycler()
 
         fun showError()
     }
@@ -19,7 +21,18 @@ interface VenueContract {
 
         fun onNewQuery(query: String)
 
+        fun onBindRowViewAtPosition(position: Int, rowViewHolder: RowViewHolder)
+
+        fun getRecordCount(): Int
+
         fun unsubscribe()
     }
+
+    interface RowViewHolder {
+
+        fun setRecord(venue: Venue)
+
+    }
+
 
 }

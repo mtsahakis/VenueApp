@@ -14,15 +14,21 @@ class VenuePresenter(
     private val compositeDisposable: CompositeDisposable
 ) : VenueContract.Presenter {
 
+    private var venues: List<Venue> = listOf()
+
     override fun setUpView() {
         view.hideProgress()
     }
 
     override fun onNewQuery(query: String) {
+        // show progress
+        view.showProgress()
+        // fetch data
         compositeDisposable.add(
             venueService.getVenues(query)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .doFinally { view.hideProgress() }
                 .subscribeWith(object : DisposableSingleObserver<List<Venue>>() {
 
                     override fun onSuccess(venues: List<Venue>) {
@@ -36,12 +42,23 @@ class VenuePresenter(
         )
     }
 
+    override fun onBindRowViewAtPosition(
+        position: Int, rowViewHolder: VenueContract.RowViewHolder
+    ) {
+        rowViewHolder.setRecord(venues[position])
+    }
+
+    override fun getRecordCount() = venues.size
+
     override fun unsubscribe() {
         compositeDisposable.dispose()
     }
 
     private fun onSuccessfulResult(venues: List<Venue>) {
         Timber.d("response: $venues")
+        this.venues = venues
+        view.hideInstructions()
+        view.notifyRecycler()
     }
 
     private fun onErrorResult(e: Throwable) {
