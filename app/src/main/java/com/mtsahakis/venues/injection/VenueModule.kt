@@ -64,8 +64,8 @@ class VenueModule {
     }
 
     @Provides
-    fun providesService(venueApi: VenueApi): VenueService {
-        return VenueService(venueApi)
+    fun providesService(venueApi: VenueApi, gson: Gson): VenueService {
+        return VenueService(venueApi, gson)
     }
 
     companion object {

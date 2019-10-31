@@ -3,4 +3,7 @@
     <string name="search_title">Search</string>
     <string name="search_hint">Type a place…</string>
     <string name="instructions">No venues listed. Press the search icon and type the place of interest. Hit the search icon on the keyboard and a list of nearby venues will appear shortly.</string>
+    <string name="error_fetching_results_s">Error fetching results: %s</string>
+    <string name="a_network_error_has_occurred">A network error has occurred</string>
+    <string name="an_error_has_occurred">An error has occurred</string>
 </resources>

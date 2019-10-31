@@ -7,6 +7,7 @@ import android.view.inputmethod.EditorInfo
 import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.mtsahakis.venues.R
 import com.mtsahakis.venues.data.VenueService
 import com.mtsahakis.venues.injection.DaggerVenueComponent
@@ -84,7 +85,23 @@ class VenueActivity : AppCompatActivity(), VenueContract.View {
         venues.adapter?.notifyDataSetChanged()
     }
 
-    override fun showError() {
+    override fun showNetworkError() {
+        showSnackBar(getString(R.string.a_network_error_has_occurred))
+    }
 
+    override fun showError() {
+        showSnackBar(getString(R.string.an_error_has_occurred))
+    }
+
+    override fun showError(message: String) {
+        showSnackBar(getString(R.string.error_fetching_results_s, message))
+    }
+
+    private fun showSnackBar(message: String) {
+        Snackbar.make(
+            window.decorView.rootView,
+            message,
+            Snackbar.LENGTH_LONG
+        ).show()
     }
 }

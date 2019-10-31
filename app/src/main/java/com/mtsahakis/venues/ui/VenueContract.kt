@@ -13,7 +13,11 @@ interface VenueContract {
 
         fun notifyRecycler()
 
+        fun showNetworkError()
+
         fun showError()
+
+        fun showError(message: String)
     }
 
     interface Presenter {
