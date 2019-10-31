@@ -25,7 +25,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/venues"
+        android:id="@+id/venuesRecycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

@@ -9,17 +9,18 @@ import com.mtsahakis.venues.data.Venue
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.list_item_venue.view.*
 
-internal class VenueAdapter(private val presenter: VenueContract.Presenter) :
-    RecyclerView.Adapter<VenueAdapter.VenueViewHolder>() {
+internal class VenueAdapter : RecyclerView.Adapter<VenueAdapter.VenueViewHolder>() {
 
     internal inner class VenueViewHolder(override val containerView: View) :
-        RecyclerView.ViewHolder(containerView), LayoutContainer, VenueContract.RowViewHolder {
+        RecyclerView.ViewHolder(containerView), LayoutContainer {
 
-        override fun setRecord(venue: Venue) {
+        fun bind(venue: Venue) {
             containerView.name.text = venue.name
-            containerView.address.text = venue.location.formattedAddress.joinToString(",")
+            containerView.address.text = venue.location.formattedAddress.joinToString(", ")
         }
     }
+
+    var venues: List<Venue> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VenueViewHolder {
         return VenueViewHolder(
@@ -32,11 +33,11 @@ internal class VenueAdapter(private val presenter: VenueContract.Presenter) :
     }
 
     override fun onBindViewHolder(holder: VenueViewHolder, position: Int) {
-        presenter.onBindRowViewAtPosition(position, holder)
+        holder.bind(venues[position])
     }
 
     override fun getItemCount(): Int {
-        return presenter.getRecordCount()
+        return venues.size
     }
 
 }

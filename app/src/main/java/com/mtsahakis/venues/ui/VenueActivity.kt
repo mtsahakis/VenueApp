@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.mtsahakis.venues.R
+import com.mtsahakis.venues.data.Venue
 import com.mtsahakis.venues.data.VenueService
 import com.mtsahakis.venues.injection.DaggerVenueComponent
 import io.reactivex.disposables.CompositeDisposable
@@ -31,8 +32,8 @@ class VenueActivity : AppCompatActivity(), VenueContract.View {
         component.inject(this)
 
         presenter = VenuePresenter(this, venueService, CompositeDisposable())
-        venues.layoutManager = LinearLayoutManager(this)
-        venues.adapter = VenueAdapter(presenter)
+        venuesRecycler.layoutManager = LinearLayoutManager(this)
+        venuesRecycler.adapter = VenueAdapter()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -77,8 +78,12 @@ class VenueActivity : AppCompatActivity(), VenueContract.View {
         progress.visibility = View.VISIBLE
     }
 
-    override fun notifyRecycler() {
-        venues.adapter?.notifyDataSetChanged()
+    override fun notifyRecycler(venues: List<Venue>) {
+        val adapter = venuesRecycler.adapter
+        if (adapter is VenueAdapter) {
+            adapter.venues = venues
+            adapter.notifyDataSetChanged()
+        }
     }
 
     override fun showNetworkError() {

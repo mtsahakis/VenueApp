@@ -12,7 +12,7 @@ interface VenueContract {
 
         fun showProgress()
 
-        fun notifyRecycler()
+        fun notifyRecycler(venues: List<Venue>)
 
         fun showNetworkError()
 
@@ -25,17 +25,7 @@ interface VenueContract {
 
         fun onNewQuery(query: String)
 
-        fun onBindRowViewAtPosition(position: Int, rowViewHolder: RowViewHolder)
-
-        fun getRecordCount(): Int
-
         fun unsubscribe()
-    }
-
-    interface RowViewHolder {
-
-        fun setRecord(venue: Venue)
-
     }
 
 }

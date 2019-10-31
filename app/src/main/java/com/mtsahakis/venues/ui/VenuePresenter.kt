@@ -16,8 +16,6 @@ class VenuePresenter(
     private val compositeDisposable: CompositeDisposable
 ) : VenueContract.Presenter {
 
-    private var venues: List<Venue> = listOf()
-
     override fun onNewQuery(query: String) {
         compositeDisposable.add(
             venueService.getVenues(query)
@@ -38,23 +36,14 @@ class VenuePresenter(
         )
     }
 
-    override fun onBindRowViewAtPosition(
-        position: Int, rowViewHolder: VenueContract.RowViewHolder
-    ) {
-        rowViewHolder.setRecord(venues[position])
-    }
-
-    override fun getRecordCount() = venues.size
-
     override fun unsubscribe() {
         compositeDisposable.dispose()
     }
 
     private fun onSuccessfulResult(venues: List<Venue>) {
         Timber.d("response: $venues")
-        this.venues = venues
         view.hideInstructions()
-        view.notifyRecycler()
+        view.notifyRecycler(venues)
     }
 
     private fun onErrorResult(e: Throwable) {
