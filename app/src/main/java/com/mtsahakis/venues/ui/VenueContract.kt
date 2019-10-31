@@ -5,6 +5,7 @@ import com.mtsahakis.venues.data.Venue
 interface VenueContract {
 
     interface View {
+
         fun hideInstructions()
 
         fun hideProgress()
@@ -21,6 +22,7 @@ interface VenueContract {
     }
 
     interface Presenter {
+
         fun setUpView()
 
         fun onNewQuery(query: String)
@@ -37,6 +39,5 @@ interface VenueContract {
         fun setRecord(venue: Venue)
 
     }
-
 
 }
