@@ -49,11 +49,11 @@ class VenuePresenter(
     private fun onErrorResult(e: Throwable) {
         Timber.e(e)
         if (e is ApiException) {
-            val message = e.errorDetail
-            if (message.isNullOrBlank()) {
+            val errorDetail = e.errorDetail
+            if (errorDetail.isNullOrBlank()) {
                 view.showError()
             } else {
-                view.showError(message)
+                view.showError(errorDetail)
             }
         } else if (e is IOException) {
             view.showNetworkError()
