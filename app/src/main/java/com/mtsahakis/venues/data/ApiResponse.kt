@@ -11,7 +11,7 @@ data class Response(@SerializedName("venues") var venues: List<Venue>)
 
 data class Meta(
     @SerializedName("code") var code: String,
-    @SerializedName("errorDetail") var errorDetail: String?
+    @SerializedName("errorDetail") var errorDetail: String? = null
 )
 
 data class Venue(

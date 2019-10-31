@@ -5,7 +5,7 @@ import com.mtsahakis.venues.data.Venue
 import com.mtsahakis.venues.data.VenueService
 import com.mtsahakis.venues.ui.VenueContract
 import com.mtsahakis.venues.ui.VenuePresenter
-import com.mtsahakis.venues.utils.RetrofitHelper.apiExceptionForInvalidLocation
+import com.mtsahakis.venues.utils.RetrofitHelper.apiExceptionInvalidLocation
 import com.mtsahakis.venues.utils.RetrofitHelper.apiExceptionNoErrorDetail
 import com.mtsahakis.venues.utils.TrampolineSchedulerRule
 import io.reactivex.Single
@@ -50,10 +50,10 @@ class VenuePresenterTest {
     fun onNewQuery_Success() {
         // given
         val location = "foo"
-        val response = listOf(Venue("1", "venue name", Location(listOf("city", "address"))))
+        val venues = listOf(Venue("1", "venue name", Location(listOf("city", "address"))))
         `when`(venueService.getVenues(location)).thenReturn(
             Single.just(
-                response
+                venues
             )
         )
 
@@ -62,7 +62,7 @@ class VenuePresenterTest {
 
         // then
         verify(view).hideInstructions()
-        verify(view).notifyRecycler(response)
+        verify(view).notifyRecycler(venues)
     }
 
     @Test
@@ -87,7 +87,7 @@ class VenuePresenterTest {
     fun onNewQuery_ApiException_With_ErrorDetail() {
         // given
         val location = "foo"
-        val apiException = apiExceptionForInvalidLocation()
+        val apiException = apiExceptionInvalidLocation()
         `when`(venueService.getVenues(location)).thenReturn(
             Single.error(
                 apiException

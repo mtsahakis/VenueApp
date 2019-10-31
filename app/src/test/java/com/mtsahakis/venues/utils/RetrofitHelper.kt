@@ -11,7 +11,7 @@ import retrofit2.Response
 
 object RetrofitHelper {
 
-    fun apiExceptionForInvalidLocation(): ApiException {
+    fun apiExceptionInvalidLocation(): ApiException {
         return createApiException(httpExceptionInvalidLocation())
     }
 
@@ -19,7 +19,7 @@ object RetrofitHelper {
         return createApiException(httpExceptionNoErrorDetail())
     }
 
-    private fun httpExceptionInvalidLocation(): HttpException {
+    fun httpExceptionInvalidLocation(): HttpException {
         val body =
             "{\"meta\":{\"code\":400,\"errorType\":\"failed_geocode\"" +
                     ",\"errorDetail\":\"Couldn't geocode param near: foo\"},\"response\":{}}"
