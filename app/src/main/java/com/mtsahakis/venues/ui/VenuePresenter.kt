@@ -18,18 +18,12 @@ class VenuePresenter(
 
     private var venues: List<Venue> = listOf()
 
-    override fun setUpView() {
-        view.hideProgress()
-    }
-
     override fun onNewQuery(query: String) {
-        // show progress
-        view.showProgress()
-        // fetch data
         compositeDisposable.add(
             venueService.getVenues(query)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe { view.showProgress() }
                 .doFinally { view.hideProgress() }
                 .subscribeWith(object : DisposableSingleObserver<List<Venue>>() {
 

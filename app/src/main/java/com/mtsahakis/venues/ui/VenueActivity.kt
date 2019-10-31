@@ -33,10 +33,6 @@ class VenueActivity : AppCompatActivity(), VenueContract.View {
         presenter = VenuePresenter(this, venueService, CompositeDisposable())
         venues.layoutManager = LinearLayoutManager(this)
         venues.adapter = VenueAdapter(presenter)
-
-        if (savedInstanceState == null) {
-            presenter.setUpView()
-        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

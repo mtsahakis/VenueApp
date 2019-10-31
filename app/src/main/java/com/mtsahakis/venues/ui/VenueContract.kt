@@ -23,8 +23,6 @@ interface VenueContract {
 
     interface Presenter {
 
-        fun setUpView()
-
         fun onNewQuery(query: String)
 
         fun onBindRowViewAtPosition(position: Int, rowViewHolder: RowViewHolder)
