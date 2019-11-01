@@ -36,7 +36,7 @@ class VenueServiceTest {
     }
 
     @Test
-    fun getVenues_Success() {
+    fun `get venues api success`() {
         // given
         val location = "foo"
         val venues = listOf(Venue("1", "venue name", Location(listOf("city", "address"))))
@@ -64,7 +64,7 @@ class VenueServiceTest {
     }
 
     @Test(expected = Exception::class)
-    fun getVenues_Exception() {
+    fun `get venues generic exception`() {
         // given
         val location = "foo"
         Mockito.`when`(
@@ -85,7 +85,7 @@ class VenueServiceTest {
     }
 
     @Test(expected = ApiException::class)
-    fun onNewQuery_ApiException() {
+    fun `get venues api exception`() {
         // given
         val location = "foo"
         Mockito.`when`(

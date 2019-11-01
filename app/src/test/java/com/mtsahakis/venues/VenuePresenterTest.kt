@@ -47,7 +47,7 @@ class VenuePresenterTest {
     }
 
     @Test
-    fun onNewQuery_Success() {
+    fun `on new query success`() {
         // given
         val location = "foo"
         val venues = listOf(Venue("1", "venue name", Location(listOf("city", "address"))))
@@ -61,12 +61,14 @@ class VenuePresenterTest {
         mPresenter.onNewQuery(location)
 
         // then
+        verify(view).showProgress()
+        verify(view).hideProgress()
         verify(view).hideInstructions()
         verify(view).notifyRecycler(venues)
     }
 
     @Test
-    fun onNewQuery_ApiException_No_ErrorDetail() {
+    fun `on new query api exception no error detail`() {
         // given
         val location = "foo"
         val apiException = apiExceptionNoErrorDetail()
@@ -80,11 +82,13 @@ class VenuePresenterTest {
         mPresenter.onNewQuery(location)
 
         // then
+        verify(view).showProgress()
+        verify(view).hideProgress()
         verify(view).showError()
     }
 
     @Test
-    fun onNewQuery_ApiException_With_ErrorDetail() {
+    fun `on new query api exception with error detail`() {
         // given
         val location = "foo"
         val apiException = apiExceptionInvalidLocation()
@@ -98,11 +102,13 @@ class VenuePresenterTest {
         mPresenter.onNewQuery(location)
 
         // then
+        verify(view).showProgress()
+        verify(view).hideProgress()
         verify(view).showError(apiException.errorDetail!!)
     }
 
     @Test
-    fun onNewQuery_IO_Exception() {
+    fun `on new query io exception`() {
         // given
         val location = "foo"
         `when`(venueService.getVenues(location)).thenReturn(
@@ -115,11 +121,13 @@ class VenuePresenterTest {
         mPresenter.onNewQuery(location)
 
         // then
+        verify(view).showProgress()
+        verify(view).hideProgress()
         verify(view).showNetworkError()
     }
 
     @Test
-    fun onNewQuery_Generic_Exception() {
+    fun `on new query generic exception`() {
         // given
         val location = "foo"
         `when`(venueService.getVenues(location)).thenReturn(
@@ -132,6 +140,8 @@ class VenuePresenterTest {
         mPresenter.onNewQuery(location)
 
         // then
+        verify(view).showProgress()
+        verify(view).hideProgress()
         verify(view).showError()
     }
 

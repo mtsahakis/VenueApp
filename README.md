@@ -47,3 +47,9 @@ Presenter class, which incorporates all our business logic.
 From the command line you can use:
 
 ./gradlew clean test
+
+Future extensions
+------------------------------------------------
+The app looses state on rotation. If a user has retrieved venues and rotate the device both the
+listing as well as the search text are lost. We could overcome this manually by using 
+onSaveInstanceState / onRestoreInstanceState or use a ViewModel in place of the Presenter. 
